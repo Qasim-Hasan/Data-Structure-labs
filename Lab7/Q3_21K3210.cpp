@@ -1,0 +1,86 @@
+//LAB 7
+//Question 3
+//21K3210
+//Qasim Hasan
+//BCS-3J
+
+//RADIX SORT IN ASCENDING AND DESCENDING
+#include<iostream>
+using namespace std;
+void CountAscending(int arr[],int size,int exp){
+    int Output[size];
+    int count[10]={0};
+    for(int i=0;i<size;i++){
+     count[arr[i]/exp%10]++;
+    }
+    for(int i=1;i<10;i++){
+    count[i]+=count[i-1];
+    } 
+    for(int i=size-1;i>=0;i--){
+    Output[--count[arr[i]/exp%10]]=arr[i];
+    }
+    for(int i=0;i<size;i++){
+    arr[i]=Output[i];
+    } 
+}
+void CountDescending(int arr[],int size,int exp){
+    int Output[size];
+    int Count[10]={0};
+    for(int i=0;i<size;i++){
+    Count[9-arr[i]/exp%10]++;
+    }
+    for(int i=1;i<10;i++){
+    Count[i]+=Count[i-1];
+    } 
+    for(int i=size-1;i>=0;i--) {
+    Output[--Count[9-arr[i] / exp% 10]] = arr[i];
+    }
+    for(int i=0;i<size;i++){
+    arr[i] = Output[i];
+    } 
+}
+void RadixSortAsc(int arr[], int size){
+    int max=arr[0];
+    for(int i=1;i<size;i++){
+        if(arr[i]>max){
+        max=arr[i];
+        }
+    }
+    int exp=1;
+    while(max/exp>0){
+    CountAscending(arr,size,exp);
+    exp*=10;
+    }
+}
+void RadixSortDec(int arr[], int size){
+    int max=arr[0];
+    for(int i=1;i<size;i++){
+        if(arr[i]>max){
+        max=arr[i];
+        }
+    }
+    int exp=1;
+    while(max/exp>0){
+    CountDescending(arr,size,exp);
+    exp*=10;
+    }
+}
+void DisplayArray(int arr[],int size){
+    for(int i=0;i<size;i++){
+        cout << arr[i]<< " ";
+    }
+    cout << endl;
+}
+int main(){
+int arr[]={12,442,14,662,32,62,5,2};
+int size=sizeof(arr)/sizeof(arr[0]);
+RadixSortAsc(arr,size);
+    cout << "Sorted Array in Ascending: "; 
+DisplayArray(arr,size);
+int arr1[]={12,442,14,662,32,62,5,2};
+int size1=sizeof(arr1)/sizeof(arr1[0]);
+RadixSortDec(arr1,size1);
+ cout << "Sorted Array in Descending: "; 
+DisplayArray(arr1,size1);
+return 0;
+}

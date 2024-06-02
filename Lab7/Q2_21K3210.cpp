@@ -1,0 +1,44 @@
+//LAB 7
+//Question 2
+//21K3210
+//Qasim Hasan
+//BCS-3J
+#include<iostream>
+using namespace std;
+void QuickSort(int arr[], int initial, int final) {
+int temp;
+int Pivot = arr[(initial+final)/2]; //Middle pivot
+int temp1 = initial;
+int temp2 = final;
+while(temp1<= temp2){
+      while(arr[temp1]<Pivot){
+      temp1++;
+      }
+      while(arr[temp2]>Pivot){
+      temp2--;
+      }
+if(temp1<=temp2){
+      temp = arr[temp1];
+      arr[temp1]=arr[temp2];
+      arr[temp2]=temp;
+      temp2--;
+      temp1++;
+}
+}
+  if(initial<temp2){
+  QuickSort(arr,initial,temp2);
+  }
+  if(temp1<final){
+  QuickSort(arr,temp1,final);
+  }
+}
+int main(){
+ int arr[]={999,612,589,856,56,945,243};
+ int size=sizeof(arr)/sizeof(arr[0]);
+ QuickSort(arr,0,(size-1));
+ cout<<"Sorting Using QuickSort"<<endl;
+ for(int i=0;i<size;i++){
+ cout<< arr[i]<<" ";
+ }
+ cout << endl;
+}
